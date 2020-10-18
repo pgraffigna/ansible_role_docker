@@ -26,3 +26,9 @@
     name: '{{ usuario }}'
     groups: docker
     append: yes    
+
+- name: Iniciar y activar el servicio Docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes    
