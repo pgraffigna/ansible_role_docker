@@ -1,7 +1,8 @@
 ---
-- hosts: 192.168.60.10
+- hosts: 192.168.0.4
   become: yes
 
   roles:
-    - docker         
+    - docker
+    - docker-compose         
     
