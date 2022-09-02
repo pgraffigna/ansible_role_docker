@@ -1,7 +1,9 @@
 ---
-- name: Descargar docker-compose 
+- include_vars: ../../vars_main.yml
+
+- name: Descargar docker-compose
   get_url:
-    url : https://github.com/docker/compose/releases/download/{{ version }}/docker-compose-Linux-x86_64
+    url : https://github.com/docker/compose/releases/download/{{ version_compose }}/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: '+x'
 

@@ -1,0 +1,5 @@
+---
+usuario: vagrant
+gpg_docker: https://download.docker.com/linux/ubuntu/gpg
+repo_docker: https://download.docker.com/linux/ubuntu
+version_compose: 1.29.0

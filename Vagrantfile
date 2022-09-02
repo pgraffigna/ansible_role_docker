@@ -1,22 +1,18 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
+IMAGEN = "generic/ubuntu2004"
 
 Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/vagrant", type: "rsync", disabled: true
 
-  config.vm.define "docker-role" do |ub|
-    ub.vm.box = "geerlingguy/ubuntu2004"
-    ub.vm.network "public_network"
-    ub.vm.hostname = "docker"
-  end
+  config.vm.define :server do |s|
+    s.vm.box = IMAGEN
+    s.vm.hostname = "docker"
+    s.vm.box_check_update = false
 
-  config.vm.provider :virtualbox do |vbox|
-    vbox.name = "test-machine"
-    vbox.memory = 2048
-    vbox.cpus = 2
+    s.vm.provider :libvirt do |v|
+      v.memory = 1024
+      v.cpus = 2
+    end
   end
 end
-
-
-
