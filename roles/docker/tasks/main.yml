@@ -1,31 +1,26 @@
 ---
-- include_vars: ../../vars_main.yml
-
-- name: Instalación de dependencias
-  apt:
-    name: "{{ item }}"
-    update_cache: true
-    cache_valid_time: 3600
-  with_items: "{{ docker_packages }}"
+- name: Incluye el archivo con las variables
+  ansible.builtin.include_vars:
+    file: vars_main.yml
 
 - name: Agrega la llave GPG de Docker
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ gpg_docker }}"
     state: present
 
 - name:  Agrega el repo
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb "{{ repo_docker }}" focal stable
     state: present
 
-- name: Instalación de docker-ce
-  apt:
-    name: docker-ce
-    state: latest
+- name: Instalación de dependencias
+  ansible.builtin.apt:
+    name: "{{ item }}"
     update_cache: true
+  with_items: "{{ docker_packages }}"
 
-- name: Agrega usuario "{{ usuario }}" a grupo Docker
-  user:
-    name: '{{ usuario }}'
+- name: Agrega usuario a grupo Docker
+  ansible.builtin.user:
+    name: '{{ ansible_user }}'
     groups: docker
     append: true

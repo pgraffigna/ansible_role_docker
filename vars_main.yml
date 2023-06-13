@@ -1,3 +1,2 @@
 ---
-usuario: vagrant
-version_compose: 1.29.0
+version_compose: 2.18.1

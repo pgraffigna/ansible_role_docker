@@ -1,9 +1,12 @@
 ---
-- include_vars: ../../vars_main.yml
+- name: Incluye el archivo con las variables
+  ansible.builtin.include_vars:
+    file: vars_main.yml
 
 - name: Descargar docker-compose
-  get_url:
-    url : https://github.com/docker/compose/releases/download/{{ version_compose }}/docker-compose-Linux-x86_64
+  ansible.builtin.get_url:
+    url : https://github.com/docker/compose/releases/download/v{{ version_compose }}/docker-compose-linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: '+x'
+
 
