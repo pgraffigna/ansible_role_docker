@@ -1,5 +1,6 @@
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'libvirt'
-IMAGEN = "generic/ubuntu2004"
+IMAGEN = "generic/ubuntu2204"
+HOSTNAME = "docker.home.local"
 
 Vagrant.configure("2") do |config|
   config.ssh.insert_key = false
@@ -7,12 +8,12 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :server do |s|
     s.vm.box = IMAGEN
-    s.vm.hostname = "docker"
+    s.vm.hostname = HOSTNAME
     s.vm.box_check_update = false
-
     s.vm.provider :libvirt do |v|
       v.memory = 1024
       v.cpus = 2
+      v.graphics_type = 'none'
     end
   end
 end

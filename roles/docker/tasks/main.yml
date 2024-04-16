@@ -10,8 +10,9 @@
 
 - name:  Agrega el repo
   ansible.builtin.apt_repository:
-    repo: deb "{{ repo_docker }}" focal stable
+    repo: "deb {{ repo_docker }} {{ ansible_distribution_release }} stable"
     state: present
+    filename: docker-sources
 
 - name: Instalación de dependencias
   ansible.builtin.apt:
