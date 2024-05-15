@@ -20,6 +20,10 @@
     update_cache: true
   with_items: "{{ docker_packages }}"
 
+- name: Instalación de dependencias pip
+  ansible.builtin.pip:
+    name: docker-compose  
+
 - name: Agrega usuario a grupo Docker
   ansible.builtin.user:
     name: '{{ ansible_user }}'

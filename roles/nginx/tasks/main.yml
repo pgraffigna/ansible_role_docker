@@ -1,0 +1,17 @@
+---
+- name: Descargando la imagen
+  docker_image:
+    name: nginx
+    tag: latest
+    source: pull
+  
+
+- name: Desplegando el contenedor
+  docker_container:
+    name: nginx
+    image: nginx
+    state: started
+    restart_policy: always
+    ports:
+      - "80:80"
+  

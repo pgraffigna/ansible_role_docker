@@ -1,4 +1,4 @@
 ---
-docker_packages:  [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common', 'docker-ce' ]
+docker_packages:  [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common', 'docker-ce', 'python3-requests', 'python3-docker', 'python3-pip' ]
 gpg_docker: "https://download.docker.com/linux/ubuntu/gpg"
 repo_docker: "https://download.docker.com/linux/ubuntu"

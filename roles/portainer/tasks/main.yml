@@ -1,0 +1,27 @@
+---
+- name: Incluye el archivo con las variables
+  ansible.builtin.include_vars:
+    file: vars_main.yml
+
+- name: Crea directorio para Portainer
+  ansible.builtin.file:
+    path: "{{ path_compose }}"
+    state: directory
+    mode: "0755"  
+    owner: "{{ ansible_user }}"  
+    group: "{{ ansible_user }}"
+
+- name: Copia configuración para docker
+  ansible.builtin.template:
+    src: "files/docker-compose.yml.j2"
+    dest: "{{ path_compose }}/docker-compose.yml"
+    mode: "0755"  
+    owner: "{{ ansible_user }}"  
+    group: "{{ ansible_user }}"
+  
+- name: Despliega Portainer via docker compose
+  community.docker.docker_compose:
+    project_src: "{{ path_compose }}"
+    state: present
+
+

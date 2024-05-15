@@ -8,10 +8,12 @@ Testeado con Vagrant + qemu + ubuntu_22.04 + ansible_2.15
 
 ### Descripción
 
-La idea del proyecto es automatizar vía ansible la instalación de [docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) y [docker-compose](https://docs.docker.com/compose/install/standalone/) para pruebas de laboratorio, el repo cuenta con 2 roles:
+La idea del proyecto es automatizar vía ansible la instalación de [docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) y [docker-compose](https://docs.docker.com/compose/install/standalone/) para pruebas de laboratorio, el repo cuenta con 4 roles:
 
 1. docker
 2. docker-compose
+3. nginx
+4. portainer
 
 ### Dependencias
 
