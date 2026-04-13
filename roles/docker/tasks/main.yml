@@ -1,8 +1,4 @@
 ---
-- name: Incluye el archivo con las variables
-  ansible.builtin.include_vars:
-    file: vars_main.yml
-
 - name: Agrega la llave GPG de Docker
   ansible.builtin.apt_key:
     url: "{{ gpg_docker }}"
@@ -19,10 +15,6 @@
     name: "{{ item }}"
     update_cache: true
   with_items: "{{ docker_packages }}"
-
-- name: Instalación de dependencias pip
-  ansible.builtin.pip:
-    name: docker-compose  
 
 - name: Agrega usuario a grupo Docker
   ansible.builtin.user:

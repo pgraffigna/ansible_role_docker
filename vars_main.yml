@@ -1,5 +1,6 @@
 ---
-version_compose: 2.27.0
-path_compose: /home/vagrant/docker-compose/portainer
+#version_compose: v2.27.0
+version_compose: v5.1.2
+path_compose: /home/vagrant/portainer
 version_portainer: latest
 volume_portainer: portainer_data

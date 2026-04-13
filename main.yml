@@ -3,8 +3,9 @@
   become: true
   gather_facts: true
 
+  vars_files:
+    - vars_main.yml
+
   roles:
     - docker
-    - docker-compose
     - portainer
-    - nginx

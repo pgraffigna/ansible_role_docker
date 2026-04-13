@@ -1,38 +1,89 @@
-# ansible_role_docker
+# Ansible Role Docker
 
-Roles para instalar docker y docker-compose en equipos con linux.
+Playbook Ansible para automatizar la instalación de Docker, Docker Compose y Portainer en entornos Linux.
 
-Testeado con Vagrant + qemu + ubuntu_22.04 + ansible_2.15
+Testeado con Vagrant + QEMU + Ubuntu 24.04 + Ansible 2.15.
 
 ---
 
-### Descripción
+## Descripción
 
-La idea del proyecto es automatizar vía ansible la instalación de [docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) y [docker-compose](https://docs.docker.com/compose/install/standalone/) para pruebas de laboratorio, el repo cuenta con 4 roles:
+Este repositorio contiene roles Ansible para automatizar la instalación y configuración de:
+- **Docker**: Motor de contenedores
+- **Docker Compose**: Herramienta para definir y ejecutar aplicaciones multi-contenedor
+- **Portainer**: Interfaz gráfica para gestionar Docker
 
-1. docker
-2. docker-compose
-3. nginx
-4. portainer
+## Herramientas utilizadas
 
-### Dependencias
+- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) - Motor de automatización
+- [Docker](https://docs.docker.com/engine/install/ubuntu/) - Plataforma de contenedores
+- [Docker Compose](https://docs.docker.com/compose/install/standalone/) - Orquestación de contenedores
+- [Portainer](https://docs.portainer.io/) - Gestión visual de Docker
+- [Vagrant](https://developer.hashicorp.com/vagrant/install) + QEMU - Entorno de pruebas (opcional)
 
-* [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html)
-* [Vagrant](https://developer.hashicorp.com/vagrant/install) (opcional)
-
-### Uso
+## Estructura del proyecto
 
 ```
+ansible_role_docker/
+├── main.yml                  # Playbook principal
+├── inventory                 # Inventario de hosts
+├── ansible.cfg               # Configuración de Ansible
+├── vars_main.yml             # Variables globales
+├── Vagrantfile               # Configuración de VM para pruebas
+├── README.md
+├── roles/
+│   ├── docker/               # Rol: instalación de Docker y Docker Compose
+│   │   ├── defaults/
+│   │   │   └── main.yml
+│   │   └── tasks/
+│   │       └── main.yml
+│   └── portainer/            # Rol: instalación de Portainer
+│       ├── files/
+│       │   └── docker-compose.yml.j2
+│       └── tasks/
+│           └── main.yml
+└── .gitignore
+```
+
+## Despliegue en entornos Linux
+
+### Requisitos previos
+
+1. Instalar Ansible y la colección de Docker:
+```bash
+ansible-galaxy collection install community.docker
+```
+
+### Ejecución
+
+1. Clonar el repositorio:
+```bash
 git clone https://github.com/pgraffigna/ansible_role_docker.git
 cd ansible_role_docker
+```
+
+2. Configurar el inventario en el archivo `inventory` con las IPs de los servidores objetivo.
+
+3. Ejecutar el playbook:
+```bash
 ansible-playbook main.yml
 ```
 
-### Extras
-* Archivo de configuración (Vagrantfile) para desplegar una VM descartable con ubuntu-22.04 con libvirt como hipervisor.
+## Entorno de pruebas con Vagrant
 
-### Uso Vagrant
-```
+Para probar en una máquina virtual con Ubuntu 22.04:
+
+```bash
 vagrant up
 vagrant ssh
 ```
+
+Esto despliega una VM descartable con Libvirt/QEMU para validar el funcionamiento del playbook.
+
+---
+
+## Dependencias
+
+- Ansible
+- Colección `community.docker`
+- Vagrant (opcional, solo para pruebas)
